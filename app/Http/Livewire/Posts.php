@@ -38,14 +38,12 @@ class Posts extends Component
 
         $this -> validate(); // take the rules from the rules method
 
-
-
         $created = ModelsPosts::create([
             'title' => $this-> title ,
             'body' => $this-> body
         ]);
 
-        $this-> posts -> prepend($created);
+        $this-> posts -> prepend($created); // like array unshift
 
         $this -> body = '' ;
         $this -> title = '' ;
