@@ -21,12 +21,23 @@ class Posts extends Component
     }
 
     public function addPost(){ // eventListener function
+
+        if ($this->title == '' || $this->body == '') {
+            // if the title or the body is empty dont insert into db
+            return ;
+        }
+
         $created = ModelsPosts::create([
             'title' => $this-> title , 
             'body' => $this-> body
         ]);
 
-        $this-> posts -> push($created);
+        $this-> posts -> prepend($created);
+    }
+
+    public function delete($id){
+        ModelsPosts::find($id)->delete();
+        $this->posts = ModelsPosts::latest() -> get();
     }
 
     
