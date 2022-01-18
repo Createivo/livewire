@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">body</label>
-          <textarea wire:model.debounce.1000ms="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea wire:model.debounce.500ms="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             @error('body')
             <small class="text-danger font-weight-bold">{{$message}}</small>
             @enderror
