@@ -16,12 +16,6 @@ class Posts extends Component
         return view('livewire.posts');
     }
 
-    // real time validation
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName); // take the rules from the rules method
-    }
-
     // make validation rules
     public function rules(){
         return [
@@ -29,6 +23,14 @@ class Posts extends Component
             'body' => 'required'
         ] ;
     }
+
+    // real time validation
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName); // take the rules from the rules method
+    }
+
+    
 
     public function mount () { // runs when the livewire component calls
         $this->posts = ModelsPosts::latest() -> get();
@@ -50,8 +52,16 @@ class Posts extends Component
     }
 
     public function delete($id){
+
         ModelsPosts::find($id)->delete();
-        $this->posts = ModelsPosts::latest() -> get();
+        
+        // $this->posts = ModelsPosts::latest() -> get();
+        // or use this better
+        // to return all the posts except the deleted one id instead of using db fetch
+
+        // $this->posts = $this->posts->except($id);
+        // ===
+        $this->posts = $this->posts->where('id' , '!=' , $id);
     }
 
 
