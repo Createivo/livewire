@@ -5,7 +5,7 @@
 
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
-          <input wire:model.debounce.1000ms="title" type="text" class="form-control" id="exampleInputEmail1"
+          <input wire:model.debounce.500ms="title" type="text" class="form-control" id="exampleInputEmail1"
             aria-describedby="emailHelp">
             @error('title')
             <small class="text-danger font-weight-bold">{{$message}}</small>
