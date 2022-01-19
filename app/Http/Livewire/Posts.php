@@ -5,15 +5,21 @@ namespace App\Http\Livewire;
 use App\Models\Posts as ModelsPosts;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Posts extends Component
 {
-    public $posts  ;
-    public $title , $body ; // data received from the form inputs titel and body
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    // public $posts  ;   [disabled because we pass the data in render method]
+    public $title , $body ; // data received from the form inputs title and body
 
     public function render() // construct like
     {
-        return view('livewire.posts');
+        return view('livewire.posts' , [
+            'posts' => ModelsPosts::latest() -> paginate(2)
+        ]);
     }
 
     // make validation rules
@@ -30,11 +36,11 @@ class Posts extends Component
         $this->validateOnly($propertyName); // take the rules from the rules method
     }
 
-    
 
-    public function mount () { // runs when the livewire component calls
-        $this->posts = ModelsPosts::latest() -> get();
-    }
+
+//    public function mount () { // runs when the livewire component calls
+//        $this->posts = ModelsPosts::latest() -> get();
+//    }    [disabled because we pass the data in render method]
 
     public function addPost(){ // eventListener function
 
@@ -45,8 +51,6 @@ class Posts extends Component
             'body' => $this-> body
         ]);
 
-        $this-> posts -> prepend($created); // like array unshift
-
         $this -> body = '' ;
         $this -> title = '' ;
     }
@@ -54,14 +58,7 @@ class Posts extends Component
     public function delete($id){
 
         ModelsPosts::find($id)->delete();
-        
-        // $this->posts = ModelsPosts::latest() -> get();
-        // or use this better
-        // to return all the posts except the deleted one id instead of using db fetch
 
-        // $this->posts = $this->posts->except($id);
-        // ===
-        $this->posts = $this->posts->where('id' , '!=' , $id);
     }
 
 

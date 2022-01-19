@@ -26,6 +26,9 @@
 
   <div class="row mt-3">
     <div class="col-lg-12">
+      <div class="mx-5">
+          {{$posts -> links()}}
+      </div>
       <div class="mx-5 mb-3 font-weight-bold">posts</div>
       @foreach ( $posts as $post )
       <div class="card mx-5 mb-3">
