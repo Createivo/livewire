@@ -21,7 +21,7 @@
             <div class="col-lg-3">
                 <div class="form-group">
                     <label for="exampleFormControlFile1">upload image</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" wire:change="$emit('showImage')">
+                    <input type="file" name="img" class="form-control-file" id="exampleFormControlFile1" wire:change="$emit('showImage')">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -85,7 +85,12 @@
             // wire:change="$emit('showImage')"
             window.Livewire.on('showImage' , function(event){
                 let imageInput = document.querySelector('input[type="file"]');
+                // extension
                 let file = imageInput.files[0];
+                let fileExt = file.name.split('.');
+                fileExt = fileExt[fileExt.length - 1];
+
+
                 let fileReader = new FileReader();
                 fileReader.readAsDataURL(file)
                 fileReader.onloadend = (event) => {
@@ -93,7 +98,7 @@
                     document.querySelector('.myImage').src = result ;
 
                     // Firing Events # Method C: From Global JavaScript
-                    Livewire.emit('imageUpload' , result);
+                    Livewire.emit('imageUpload' , [result, fileExt]);
                 }
             })
         </script>

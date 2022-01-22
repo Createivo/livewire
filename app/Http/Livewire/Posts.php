@@ -53,6 +53,7 @@ class Posts extends Component
 
         $this -> body = '' ;
         $this -> title = '' ;
+        $this -> image = '' ;
     }
 
     public function delete($id){
