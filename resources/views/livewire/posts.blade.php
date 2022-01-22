@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-lg-12 ">
       <form class="mx-5 mt-5" wire:submit.prevent="addPost">
-
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
           <input wire:model.debounce.500ms="title" type="text" class="form-control" id="exampleInputEmail1"
@@ -17,6 +16,17 @@
             @error('body')
             <small class="text-danger font-weight-bold">{{$message}}</small>
             @enderror
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">upload image</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" wire:change="$emit('showImage')">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img width="200" class="myImage" src="{{$image}}" alt="">
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">add post</button>
@@ -68,7 +78,27 @@
         </ul>
       </div>
       @endforeach
+
+        <script>
+            // Firing Events # Method A: From The Template
+            // this is the fired event from the input file
+            // wire:change="$emit('showImage')"
+            window.Livewire.on('showImage' , function(event){
+                let imageInput = document.querySelector('input[type="file"]');
+                let file = imageInput.files[0];
+                let fileReader = new FileReader();
+                fileReader.readAsDataURL(file)
+                fileReader.onloadend = (event) => {
+                    let result = event.target.result;
+                    document.querySelector('.myImage').src = result ;
+
+                    // Firing Events # Method C: From Global JavaScript
+                    Livewire.emit('imageUpload' , result);
+                }
+            })
+        </script>
     </div>
   </div>
-
 </div>
+
+

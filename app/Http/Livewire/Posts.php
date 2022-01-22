@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Traits\Image;
 use App\Models\Posts as ModelsPosts;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -9,10 +10,11 @@ use Livewire\WithPagination;
 
 class Posts extends Component
 {
+    use Image ;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    // public $posts  ;   [disabled because we pass the data in render method]
+
     public $title , $body ; // data received from the form inputs title and body
 
     public function render() // construct like
@@ -37,18 +39,16 @@ class Posts extends Component
     }
 
 
-
-//    public function mount () { // runs when the livewire component calls
-//        $this->posts = ModelsPosts::latest() -> get();
-//    }    [disabled because we pass the data in render method]
-
     public function addPost(){ // eventListener function
 
         $this -> validate(); // take the rules from the rules method
 
+        $img = $this -> uploadImageToServer();
+
         $created = ModelsPosts::create([
             'title' => $this-> title ,
-            'body' => $this-> body
+            'body' => $this-> body ,
+            'img' => $img
         ]);
 
         $this -> body = '' ;
@@ -56,8 +56,13 @@ class Posts extends Component
     }
 
     public function delete($id){
+        try {
+            ModelsPosts::find($id)->delete();
+        } catch (\Exception $e) {
+            dd($e -> getMessage());
+        }
 
-        ModelsPosts::find($id)->delete();
+
 
     }
 
