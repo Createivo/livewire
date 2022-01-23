@@ -31,7 +31,6 @@ trait Image {
     public function uploadImageToServer()
     {
         if (!$this->image) return null ;
-
         // php image intervention
         // https://image.intervention.io/v2 package
         $img = ImageManagerStatic::make($this->image)->encode($this->ext);
@@ -41,5 +40,4 @@ trait Image {
         Storage::disk('public')->put($randomName , $img);
         return $randomName ;
     }
-
 }

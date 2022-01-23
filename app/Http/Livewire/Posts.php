@@ -58,12 +58,12 @@ class Posts extends Component
 
     public function delete($id){
         try {
-            ModelsPosts::find($id)->delete();
+            $post = ModelsPosts::find($id);
+            \Storage::disk('public')->delete(ModelsPosts::find($id)-> img);
+            $post -> delete();
         } catch (\Exception $e) {
             dd($e -> getMessage());
         }
-
-
 
     }
 
