@@ -74,10 +74,13 @@
           {{$post->title }}--- {{ $post->created_at->diffForHumans()}}
         </div>
         <ul class="list-group list-group-flush">
+
           <li class="list-group-item">{{$post->body}}</li>
           @if($post->img)
                 {{--   php artisan storage:link ->  storage/'.$post->img --}}
-                <li class="list-group-item"><img width="200" src="{{'storage/'.$post->img}}" alt=""></li>
+                <li class="list-group-item"><img width="200" src="
+                {{ Storage::disk('public')->exists($post->img) ? 'storage/'.$post->img : $post -> img}}"
+                 alt=""></li>
           @endif
         </ul>
       </div>

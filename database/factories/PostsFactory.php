@@ -15,7 +15,8 @@ class PostsFactory extends Factory
     {
             return [
                 'title' => $this->faker->name(),
-                'body' => $this->faker->text()
+                'body' => $this->faker->text(),
+                'img'=> $this->faker->imageUrl(200, 200, 'animals', true)
             ];
     }
 }
