@@ -14,11 +14,17 @@ class NewImageUpload extends Component
         return view('livewire.new-image-upload');
     }
 
-    public function save(){
+    public function updatedImage()
+    {
         $this->validate([
-            'image' => 'required|max:1024'
+            'image' => 'image|max:20', // 1MB Max
         ]);
+    }
 
-        $this->image->store('images_folder');
+    public function save(){
+
+        $x = $this->image->store('images_folder');
+
+        ddd($x);
     }
 }
