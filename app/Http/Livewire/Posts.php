@@ -28,7 +28,7 @@ class Posts extends Component
     public function rules(){
         return [
             'title' => 'required|max:30' ,
-            'body' => 'required'
+            'body' => 'required|string'
         ] ;
     }
 

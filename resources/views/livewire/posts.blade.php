@@ -11,6 +11,7 @@
         <div class="form-group">
           <label for="exampleFormControlTextarea1">body</label>
           <textarea wire:model.lazy="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            @error('body') <span>{{$message}}</span>@enderror
         </div>
 
         <button type="submit" class="btn btn-primary">add post</button>
