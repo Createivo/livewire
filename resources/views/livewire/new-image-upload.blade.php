@@ -14,4 +14,5 @@
         Photo Preview:
         <img src="{{ $image->temporaryUrl() }}">
     @endif
+
 </div>

@@ -1,1 +1,1 @@
-### image upload with laravel livewire2
+### show select box when choose from a parent select box

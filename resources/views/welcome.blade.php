@@ -21,7 +21,10 @@
     <div class="container">
         <livewire:new-image-upload/>
         <hr>
-        <livewire:posts>
+        <livewire:select-box />
+        <hr>
+        <livewire:posts />
+        <hr>
 
     </div>
 
