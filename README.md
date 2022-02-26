@@ -7,4 +7,5 @@ database factory
 
 postsFactory
 'user_id' => User::all()->random()-> id,
+<br>
 'user_id' => User::inRandomOrder()->first(),
