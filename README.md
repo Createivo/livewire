@@ -2,10 +2,14 @@
 
 
 laravel livewire test
+<br>
 database seeds
+<br>
 database factory
+<br>
 
 postsFactory
+<br>
 'user_id' => User::all()->random()-> id,
 <br>
 'user_id' => User::inRandomOrder()->first(),
