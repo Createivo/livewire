@@ -4,9 +4,9 @@
 # laravel livewire test
 <br>
 ## database seeds
-<br>
+
 ## database factory
-<br>
+
 
 ## postsFactory
 <br>
