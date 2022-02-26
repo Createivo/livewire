@@ -2,10 +2,10 @@
 
 
 # laravel livewire test
-<br>
-## database seeds
 
-## database factory
+### database seeds
+
+### database factory
 
 
 ## postsFactory
