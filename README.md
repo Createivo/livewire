@@ -13,3 +13,6 @@ postsFactory
 'user_id' => User::all()->random()-> id,
 <br>
 'user_id' => User::inRandomOrder()->first(),
+
+## image trait 
+make image trait and use it in the livewire class
